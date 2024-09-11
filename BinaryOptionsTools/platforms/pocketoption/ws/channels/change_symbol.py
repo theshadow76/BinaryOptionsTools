@@ -1,6 +1,6 @@
 """Module for PocketOption change symbol websocket chanel."""
 
-from pocketoptionapi.ws.channels.base import Base
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.base import Base
 import time
 import random
 

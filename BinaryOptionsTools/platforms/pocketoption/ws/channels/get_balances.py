@@ -1,4 +1,4 @@
-from pocketoptionapi.ws.channels.base import Base
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.base import Base
 import time
 
 

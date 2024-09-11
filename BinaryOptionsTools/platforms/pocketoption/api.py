@@ -9,16 +9,16 @@ import requests
 import ssl
 import atexit
 from collections import deque
-from pocketoptionapi.ws.client import WebsocketClient
-from pocketoptionapi.ws.channels.get_balances import *
+from BinaryOptionsTools.platforms.pocketoption.ws.client import WebsocketClient
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.get_balances import *
 
-from pocketoptionapi.ws.channels.ssid import Ssid
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.ssid import Ssid
 # from pocketoptionapi.ws.channels.subscribe import *
 # from pocketoptionapi.ws.channels.unsubscribe import *
 # from pocketoptionapi.ws.channels.setactives import SetActives
-from pocketoptionapi.ws.channels.candles import GetCandles
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.candles import GetCandles
 # from pocketoptionapi.ws.channels.buyv2 import Buyv2
-from pocketoptionapi.ws.channels.buyv3 import *
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.buyv3 import *
 # from pocketoptionapi.ws.channels.user import *
 # from pocketoptionapi.ws.channels.api_game_betinfo import Game_betinfo
 # from pocketoptionapi.ws.channels.instruments import Get_instruments
@@ -45,15 +45,15 @@ from pocketoptionapi.ws.channels.buyv3 import *
 # from pocketoptionapi.ws.channels.change_tpsl import Change_Tpsl
 # from pocketoptionapi.ws.channels.change_auto_margin_call import ChangeAutoMarginCall
 
-from pocketoptionapi.ws.objects.timesync import TimeSync
+from BinaryOptionsTools.platforms.pocketoption.ws.objects.timesync import TimeSync
 # from pocketoptionapi.ws.objects.profile import Profile
-from pocketoptionapi.ws.objects.candles import Candles
+from BinaryOptionsTools.platforms.pocketoption.ws.objects.candles import Candles
 # from pocketoptionapi.ws.objects.listinfodata import ListInfoData
 # from pocketoptionapi.ws.objects.betinfo import Game_betinfo_data
-import pocketoptionapi.global_value as global_value
-from pocketoptionapi.ws.channels.change_symbol import ChangeSymbol
+import BinaryOptionsTools.platforms.pocketoption.global_value as global_value
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.change_symbol import ChangeSymbol
 from collections import defaultdict
-from pocketoptionapi.ws.objects.time_sync import TimeSynchronizer
+from BinaryOptionsTools.platforms.pocketoption.ws.objects.time_sync import TimeSynchronizer
 
 
 def nested_dict(n, type):

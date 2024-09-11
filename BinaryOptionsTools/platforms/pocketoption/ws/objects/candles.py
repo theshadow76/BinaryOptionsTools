@@ -1,6 +1,6 @@
 """Module for Pocket Option Candles websocket object."""
 
-from pocketoptionapi.ws.objects.base import Base
+from BinaryOptionsTools.platforms.pocketoption.ws.objects.base import Base
 
 
 class Candle(object):

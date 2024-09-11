@@ -4,14 +4,14 @@ import threading
 import sys
 from tzlocal import get_localzone
 import json
-from platforms.pocketoption.api import PocketOptionAPI
-import platforms.pocketoption.constants as OP_code
+from BinaryOptionsTools.platforms.pocketoption.api import PocketOptionAPI
+import BinaryOptionsTools.platforms.pocketoption.constants as OP_code
 # import pocketoptionapi.country_id as Country
 # import threading
 import time
 import logging
 import operator
-import platforms.pocketoption.global_value as global_value
+import BinaryOptionsTools.platforms.pocketoption.global_value as global_value
 from collections import defaultdict
 from collections import deque
 # from pocketoptionapi.expiration import get_expiration_time, get_remaning_time

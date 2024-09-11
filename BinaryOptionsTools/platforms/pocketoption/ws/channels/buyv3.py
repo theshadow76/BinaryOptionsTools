@@ -1,10 +1,10 @@
 import datetime
 import json
 import time
-from pocketoptionapi.ws.channels.base import Base
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.base import Base
 import logging
-import pocketoptionapi.global_value as global_value
-from pocketoptionapi.expiration import get_expiration_time
+import BinaryOptionsTools.platforms.pocketoption.global_value as global_value
+from BinaryOptionsTools.platforms.pocketoption.expiration import get_expiration_time
 
 
 class Buyv3(Base):

@@ -7,11 +7,11 @@ import logging
 import ssl
 
 # Suponiendo la existencia de estos módulos basados en tu código original
-import pocketoptionapi.constants as OP_code
-import pocketoptionapi.global_value as global_value
-from pocketoptionapi.constants import REGION
-from pocketoptionapi.ws.objects.timesync import TimeSync
-from pocketoptionapi.ws.objects.time_sync import TimeSynchronizer
+import BinaryOptionsTools.platforms.pocketoption.constants as OP_code
+import BinaryOptionsTools.platforms.pocketoption.global_value as global_value
+from BinaryOptionsTools.platforms.pocketoption.constants import REGION
+from BinaryOptionsTools.platforms.pocketoption.ws.objects.timesync import TimeSync
+from BinaryOptionsTools.platforms.pocketoption.ws.objects.time_sync import TimeSynchronizer
 
 logger = logging.getLogger(__name__)
 

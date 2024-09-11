@@ -1,6 +1,6 @@
 """Module for Pocket Option API ssid websocket chanel."""
 
-from pocketoptionapi.ws.channels.base import Base
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.base import Base
 
 
 class Ssid(Base):
