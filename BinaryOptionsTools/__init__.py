@@ -40,3 +40,6 @@ class pocketoption:
             ido = self.api.buy(amount, active, "Put", expiration)
             return ido
         return None
+    def GetCandles(self, active, period, start_time=None, count=6000, count_request=1):
+        data = self.api.get_candles(active, period, start_time, count, count_request)
+        return data
