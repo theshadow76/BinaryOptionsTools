@@ -22,4 +22,9 @@ class pocketoption:
         elif self.api.check_connect() == False:
             return False
         return None
-    
+    def Call(self, amount: int = 1, active: str = "EURUSD_otc", expiration: int = 60):
+        ido = self.api.buy(amount, active, "Call", expiration)
+        return ido
+    def Put(self, amount: int = 1, active: str = "EURUSD_otc", expiration: int = 60):
+        ido = self.api.buy(amount, active, "Put", expiration)
+        return ido
