@@ -26,7 +26,8 @@ class pocketoption:
         return None
     def Call(self, amount: int = 1, active: str = "EURUSD_otc", expiration: int = 60, add_check_win: bool = False):
         if add_check_win:
-            ido = self.api.buy(amount, active, "call", expiration)
+            ido = self.api.buy(amount, active, "call", expiration)[1]
+            print(ido)
             data = self.api.check_win(ido)
             return data
         elif add_check_win == False:
