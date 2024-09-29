@@ -225,7 +225,7 @@ class PocketOptionAPI(object):  # pylint: disable=too-many-instance-attributes
                 pass
             pass
 
-    def connect(self):
+    async def connect(self):
         """Method for connection to Pocket Option API."""
 
         global_value.ssl_Mutual_exclusion = False
