@@ -26,20 +26,20 @@ class pocketoption:
         return None
     def Call(self, amount: int = 1, active: str = "EURUSD_otc", expiration: int = 60, add_check_win: bool = False):
         if add_check_win:
-            ido = self.api.buy(amount, active, "Call", expiration)
+            ido = self.api.buy(amount, active, "call", expiration)
             data = self.api.check_win(ido)
             return data
         elif add_check_win == False:
-            ido = self.api.buy(amount, active, "Call", expiration)
+            ido = self.api.buy(amount, active, "call", expiration)
             return ido
         return None
     def Put(self, amount: int = 1, active: str = "EURUSD_otc", expiration: int = 60, add_check_win: bool = False):
         if add_check_win:
-            ido = self.api.buy(amount, active, "Put", expiration)
+            ido = self.api.buy(amount, active, "put", expiration)
             data = self.api.check_win(ido)
             return data
         elif add_check_win == False:
-            ido = self.api.buy(amount, active, "Put", expiration)
+            ido = self.api.buy(amount, active, "put", expiration)
             return ido
         return None
     def GetCandles(self, active, period, start_time=None, count=6000, count_request=1):

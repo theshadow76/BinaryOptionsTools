@@ -7,4 +7,4 @@ print(f"GET BALANCE: {api.GetBalance()}")
 
 print(rsi(api, 60, "EURUSD_otc", 14))
 
-print(api.Call(amount=1, active="EURUSD_otc", expiration=7, add_check_win=True))
+print(api.Call(amount=1, active="EURUSD_otc", expiration=7, add_check_win=False))
