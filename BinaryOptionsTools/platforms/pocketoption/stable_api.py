@@ -248,6 +248,12 @@ class PocketOption:
 
         if order_info and "profit" in order_info:
             status = "win" if order_info["profit"] > 0 else "lose"
+            if order_info["profit"] > 0:
+                status = "win"
+            elif order_info["profit"] == 0:
+                status == "draw"
+            else:
+                status == "loss"
             return order_info["profit"], status
         else:
             logging.error("Invalid order info retrieved.")
