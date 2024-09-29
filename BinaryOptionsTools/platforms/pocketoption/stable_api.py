@@ -272,7 +272,6 @@ class PocketOption:
         :param count_request: El número de peticiones para obtener más datos históricos.
         """
         try:
-            print("In try")
             if start_time is None:
                 time_sync = self.get_server_timestamp()
                 time_red = self.last_time(time_sync, period)
@@ -287,7 +286,7 @@ class PocketOption:
                 #print("In FOr Loop")
 
                 while True:
-                    logging.info("Entered WHileloop in GetCandles")
+                    #logging.info("Entered WHileloop in GetCandles")
                     #print("In WHile loop")
                     try:
                         # Enviar la petición de velas
@@ -336,11 +335,11 @@ class PocketOption:
             # Resetear el índice para que 'time' vuelva a ser una columna
             df_resampled.reset_index(inplace=True)
 
-            print("FINISHED!!!")
+            #print("FINISHED!!!")
 
             return df_resampled
         except:
-            print("In except")
+            #print("In except")
             return None
 
     @staticmethod
