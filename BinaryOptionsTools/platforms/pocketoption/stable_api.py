@@ -126,7 +126,7 @@ class PocketOption:
         """
         try:
             # Iniciar el hilo que manejará la conexión WebSocket
-            websocket_thread = threading.Thread(target=await self.api.connect, daemon=True)
+            websocket_thread = threading.Thread(target=self.api.connect, daemon=True)
             await websocket_thread.start()
 
         except Exception as e:
