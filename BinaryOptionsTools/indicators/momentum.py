@@ -1,4 +1,4 @@
-from ta.momentum import RSIIndicator
+from ta.momentum import *
 import pandas as pd
 import time
 
@@ -27,6 +27,13 @@ def _fetch_candles(api, active, period, num_candles):
 def rsi(api, timeframe: int = 60, ticker: str = "EURUSD_otc", rsi_period: int = 14):
     close = _fetch_candles(api=api, active=ticker, period=timeframe, num_candles=420)
     rsi_data = RSIIndicator(close=close["close"], window=rsi_period, fillna=True).rsi()
+    return {
+        "rsi_values" : rsi_data,
+        "latest" : rsi_data.iloc[-1]
+    }
+def roc(api, timeframe: int = 60, ticker: str = "EURUSD_otc", perdiod: int = 14):
+    close = _fetch_candles(api=api, active=ticker, period=timeframe, num_candles=420)
+    rsi_data = ROCIndicator(close=close["close"], window=perdiod, fillna=True).roc()
     return {
         "rsi_values" : rsi_data,
         "latest" : rsi_data.iloc[-1]
