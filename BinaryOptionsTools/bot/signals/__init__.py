@@ -13,9 +13,9 @@ class signals:
         fast_sma = sma(api, timeframe, ticker, FAST_SMA_PERIOD)
         slow_sma = sma(api, timeframe, ticker, SLOW_SMA_PERIOD)
 
-        if fast_sma > slow_sma:
+        if fast_sma["latest"] > slow_sma["latest"]:
             return "Bullish"
-        elif fast_sma < slow_sma:
+        elif fast_sma["latest"] < slow_sma["latest"]:
             return "Bearish"
         else:
             return "No trend"
