@@ -9,7 +9,8 @@ class pocketoption:
     def __init__(self, ssid: str, demo: bool = True) -> None:
         self.ssid = ssid
         self.api = PocketOption(ssid, demo)
-        asyncio.run(self.api.connect())
+        self.api.connect()
+        time.sleep(10)
     def GetBalance(self) -> int | float:
         data = self.api.get_balance()
         return data
@@ -43,4 +44,7 @@ class pocketoption:
         return None
     def GetCandles(self, active, period, start_time=None, count=6000, count_request=1):
         data = self.api.get_candles(active, period, start_time, count, count_request)
+        return data
+    def CheckWin(self, id):
+        data = self.api.check_win(id)
         return data

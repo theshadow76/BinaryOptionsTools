@@ -119,7 +119,7 @@ class PocketOption:
         except Exception as e:
             print(f"Error during disconnect: {e}")
 
-    async def connect(self):
+    def connect(self):
         """
         Método síncrono para establecer la conexión.
         Utiliza internamente el bucle de eventos de asyncio para ejecutar la coroutine de conexión.
@@ -127,7 +127,7 @@ class PocketOption:
         try:
             # Iniciar el hilo que manejará la conexión WebSocket
             websocket_thread = threading.Thread(target=self.api.connect, daemon=True)
-            await websocket_thread.start()
+            websocket_thread.start()
 
         except Exception as e:
             print(f"Error al conectar: {e}")
