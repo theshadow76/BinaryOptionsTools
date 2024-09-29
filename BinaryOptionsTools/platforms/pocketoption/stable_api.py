@@ -119,7 +119,7 @@ class PocketOption:
         except Exception as e:
             print(f"Error during disconnect: {e}")
 
-    def connect(self):
+    async def connect(self):
         """
         Método síncrono para establecer la conexión.
         Utiliza internamente el bucle de eventos de asyncio para ejecutar la coroutine de conexión.
@@ -127,9 +127,7 @@ class PocketOption:
         try:
             # Iniciar el hilo que manejará la conexión WebSocket
             websocket_thread = threading.Thread(target=self.api.connect, daemon=True)
-            websocket_thread.start()
-            print("Connecting")
-            time.sleep(10)
+            await websocket_thread.start()
 
         except Exception as e:
             print(f"Error al conectar: {e}")
@@ -248,6 +246,12 @@ class PocketOption:
 
         if order_info and "profit" in order_info:
             status = "win" if order_info["profit"] > 0 else "lose"
+            if order_info["profit"] > 0:
+                status = "win"
+            elif order_info["profit"] == 0:
+                status == "draw"
+            else:
+                status == "loss"
             return order_info["profit"], status
         else:
             logging.error("Invalid order info retrieved.")
@@ -272,7 +276,6 @@ class PocketOption:
         :param count_request: El número de peticiones para obtener más datos históricos.
         """
         try:
-            print("In try")
             if start_time is None:
                 time_sync = self.get_server_timestamp()
                 time_red = self.last_time(time_sync, period)
@@ -287,7 +290,7 @@ class PocketOption:
                 #print("In FOr Loop")
 
                 while True:
-                    logging.info("Entered WHileloop in GetCandles")
+                    #logging.info("Entered WHileloop in GetCandles")
                     #print("In WHile loop")
                     try:
                         # Enviar la petición de velas
@@ -336,11 +339,11 @@ class PocketOption:
             # Resetear el índice para que 'time' vuelva a ser una columna
             df_resampled.reset_index(inplace=True)
 
-            print("FINISHED!!!")
+            #print("FINISHED!!!")
 
             return df_resampled
         except:
-            print("In except")
+            #print("In except")
             return None
 
     @staticmethod

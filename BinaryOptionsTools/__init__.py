@@ -3,12 +3,13 @@
 # Pocket Option
 from BinaryOptionsTools.platforms.pocketoption.stable_api import PocketOption
 import time
+import asyncio
 #--------------------- Pocket Option Wrapper ---------------------#
 class pocketoption:
     def __init__(self, ssid: str, demo: bool = True) -> None:
         self.ssid = ssid
         self.api = PocketOption(ssid, demo)
-        self.api.connect()
+        asyncio.run(self.api.connect())
     def GetBalance(self) -> int | float:
         data = self.api.get_balance()
         return data
