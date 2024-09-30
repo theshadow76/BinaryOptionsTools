@@ -14,7 +14,7 @@
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/BinaryOptionsTools.git
+    git clone https://github.com/theshadowtech76/BinaryOptionsTools.git
     cd BinaryOptionsTools
     ```
 
