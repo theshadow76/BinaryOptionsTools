@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: BinaryOptionstools
+Version: 0.1.0
+Summary: Tools for Binary Options trading
+Home-page: https://github.com/yourusername/BinaryOptionstools
+Author: Vigo
+Author-email: vigopaul05@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: pandas
+
+# BinaryOptionsTools
+
+In development
+
+use all the binaryoptions api, all the indicators, pre built bots all in one place!
