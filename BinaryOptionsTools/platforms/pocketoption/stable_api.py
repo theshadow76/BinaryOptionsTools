@@ -41,6 +41,7 @@ class PocketOption:
                      3600, 7200, 14400, 28800, 43200, 86400, 604800, 2592000]
         global_value.SSID = ssid
         global_value.DEMO = demo
+        global_value.IS_DEMO = demo
         print(demo)
         self.suspend = 0.5
         self.thread = None

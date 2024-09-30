@@ -9,6 +9,7 @@ class pocketoption:
         self.ssid = ssid
         self.api = PocketOption(ssid, demo)
         self.api.connect()
+        print("Connecting...")
         time.sleep(10)
     def GetBalance(self) -> int | float:
         data = self.api.get_balance()

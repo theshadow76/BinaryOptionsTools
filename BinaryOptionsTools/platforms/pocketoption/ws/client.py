@@ -98,20 +98,54 @@ class WebsocketClient(object):
             pass
 
         while not global_value.websocket_is_connected:
-            for url in self.region.get_regions(True):
-                print(url)
+            if global_value.IS_DEMO == False:
+                for url in self.region.get_regions(True):
+                    print(url)
+                    try:
+                        async with websockets.connect(
+                                url,
+                                ssl=ssl_context,
+                                extra_headers={"Origin": "https://pocketoption.com", "Cache-Control": "no-cache"},
+                                user_agent_header="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, "
+                                                "like Gecko) Chrome/124.0.0.0 Safari/537.36"
+                        ) as ws:
+
+                            # print("Connected a: ", url)
+                            self.websocket = ws
+                            self.url = url
+                            global_value.websocket_is_connected = True
+
+                            # Crear y ejecutar tareas
+                            # process_message_task = asyncio.create_task(process_message(self.message))
+                            on_message_task = asyncio.create_task(self.websocket_listener(ws))
+                            sender_task = asyncio.create_task(self.send_message(self.message))
+                            ping_task = asyncio.create_task(send_ping(ws))
+
+                            await asyncio.gather(on_message_task, sender_task, ping_task)
+
+                    except websockets.ConnectionClosed as e:
+                        global_value.websocket_is_connected = False
+                        await self.on_close(e)
+                        logger.warning("Trying another server")
+
+                    except Exception as e:
+                        global_value.websocket_is_connected = False
+                        await self.on_error(e)
+
+                await asyncio.sleep(1)  # Esperar antes de intentar reconectar
+            elif global_value.IS_DEMO:
                 try:
                     async with websockets.connect(
-                            url,
+                            REGION.DEMO_REGION,
                             ssl=ssl_context,
                             extra_headers={"Origin": "https://pocketoption.com", "Cache-Control": "no-cache"},
                             user_agent_header="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, "
-                                              "like Gecko) Chrome/124.0.0.0 Safari/537.36"
+                                            "like Gecko) Chrome/124.0.0.0 Safari/537.36"
                     ) as ws:
 
                         # print("Connected a: ", url)
                         self.websocket = ws
-                        self.url = url
+                        self.url = REGION.DEMO_REGION
                         global_value.websocket_is_connected = True
 
                         # Crear y ejecutar tareas
@@ -130,8 +164,6 @@ class WebsocketClient(object):
                 except Exception as e:
                     global_value.websocket_is_connected = False
                     await self.on_error(e)
-
-            await asyncio.sleep(1)  # Esperar antes de intentar reconectar
 
         return True
 

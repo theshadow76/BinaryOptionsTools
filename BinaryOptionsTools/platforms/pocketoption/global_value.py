@@ -21,6 +21,7 @@ order_open = []
 order_closed = []
 stat = []
 DEMO = None
+IS_DEMO = True
 
 # To get the payout data for the diferent pairs
 PayoutData = None
