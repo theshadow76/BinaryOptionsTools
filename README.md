@@ -12,6 +12,15 @@
 
 ## Getting Started
 
+NOTE: We recommend making a virtual env: 
+```bash
+python -m venv env # windows
+python3 -m venv env # mac / linux
+source env/bin/activate # linux / mac
+./env/Scripts/activate # windows
+```
+
+
 1. Clone the repository:
     ```bash
     git clone https://github.com/theshadow76/BinaryOptionsTools.git
