@@ -13,6 +13,29 @@ from BinaryOptionsTools.platforms.pocketoption.constants import REGION
 from BinaryOptionsTools.platforms.pocketoption.ws.objects.timesync import TimeSync
 from BinaryOptionsTools.platforms.pocketoption.ws.objects.time_sync import TimeSynchronizer
 
+import re
+
+def get_user_agent(message: str) -> dict[str, int | str] | None:
+    # Extract user agent length
+    pattern_length = r'"user_agent";s:(\d+):"'
+    match_length = re.search(pattern_length, message)
+    
+    if match_length:
+        length = int(match_length.group(1))
+        
+        # Extract full user agent string
+        pattern_full = rf'"user_agent";s:{length}:"(.*?)"'
+        match_full = re.search(pattern_full, message)
+        
+        if match_full:
+            return {
+                "length": length,
+                "full": match_full.group(1).strip('"')
+            }
+    else:
+        return None
+
+
 logger = logging.getLogger(__name__)
 
 timesync = TimeSync()
@@ -73,7 +96,7 @@ class WebsocketClient(object):
         self.api = api
         self.message = None
         self.url = None
-        self.ssid = global_value.SSID
+        self.ssid: str = global_value.SSID
         self.websocket = None
         self.region = REGION()
         self.loop = asyncio.get_event_loop()
@@ -99,6 +122,11 @@ class WebsocketClient(object):
 
         while not global_value.websocket_is_connected:
             if global_value.IS_DEMO == False:
+                user_agent = get_user_agent(self.ssid)
+                if user_agent:
+                    user_agent = user_agent["full"]
+                else: 
+                    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
                 for url in self.region.get_regions(True):
                     print(url)
                     try:
@@ -106,8 +134,7 @@ class WebsocketClient(object):
                                 url,
                                 ssl=ssl_context,
                                 extra_headers={"Origin": "https://pocketoption.com", "Cache-Control": "no-cache"},
-                                user_agent_header="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, "
-                                                "like Gecko) Chrome/124.0.0.0 Safari/537.36"
+                                user_agent_header=user_agent
                         ) as ws:
 
                             # print("Connected a: ", url)
