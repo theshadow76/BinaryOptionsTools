@@ -190,8 +190,8 @@ class PocketOptionAPI(object):  # pylint: disable=too-many-instance-attributes
             pass
         global_value.ssl_Mutual_exclusion_write = True
 
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
+        # loop = asyncio.new_event_loop()
+        # asyncio.set_event_loop(loop)
 
         # Ejecutar la corutina connect dentro del bucle de eventos del nuevo hilo
         loop.run_until_complete(self.websocket.send_message(data))

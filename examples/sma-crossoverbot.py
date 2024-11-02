@@ -1,10 +1,11 @@
 from BinaryOptionsTools import pocketoption
 import ta
 import time
-import pandas as pd
+# import pandas as pd
 
-ssid = (r'42["auth",{"session":"n6ghkt8nk931jj6ffljoj8knj3","isDemo":1,"uid":85249466,"platform":2}]')
-api = pocketoption(ssid)
+ssid = input("Enter your ssid: ")
+demo = not bool(int(input("Do you want to use demo or real account? (0: demo, 1: real) ")))
+api = pocketoption(ssid, demo)
 
 def GetCandles(symbol, timeframe, limit=100):
     # Fetch candle data for a given symbol and timeframe
