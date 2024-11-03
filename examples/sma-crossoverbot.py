@@ -3,8 +3,8 @@ import ta
 import time
 # import pandas as pd
 
-ssid = input("Enter your ssid: ")
-demo = not bool(int(input("Do you want to use demo or real account? (0: demo, 1: real) ")))
+ssid = (r'42["auth",{"session":"vtftn12e6f5f5008moitsd6skl","isDemo":1,"uid":27658142,"platform":2}]')
+demo = True
 api = pocketoption(ssid, demo)
 
 def GetCandles(symbol, timeframe, limit=100):
@@ -31,10 +31,13 @@ def DetectSMAsimple(symbol, timeframe, period=14):
 def DetectSMAStream(symbol, timeframe, period=14, interval=60):
     # Continuously fetch and detect SMA trend
     while True:
-        result = DetectSMAsimple(symbol, timeframe, period)
-        print(f"SMA Trend: {result}")
-        # Wait for the next update (based on interval)
-        time.sleep(interval)
+        try:
+            result = DetectSMAsimple(symbol, timeframe, period)
+            print(f"SMA Trend: {result}")
+            # Wait for the next update (based on interval)
+            time.sleep(interval)
+        except KeyboardInterrupt:
+            break
 
 # Detect SMA once
 print(DetectSMAsimple("EURUSD_otc", 1))
