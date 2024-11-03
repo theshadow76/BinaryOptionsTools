@@ -5,15 +5,12 @@ import sys
 from tzlocal import get_localzone
 import json
 from BinaryOptionsTools.platforms.pocketoption.api import PocketOptionAPI
-import BinaryOptionsTools.platforms.pocketoption.constants as OP_code
 # import pocketoptionapi.country_id as Country
 # import threading
 import time
 import logging
-import operator
 import BinaryOptionsTools.platforms.pocketoption.global_value as global_value
 from collections import defaultdict
-from collections import deque
 # from pocketoptionapi.expiration import get_expiration_time, get_remaning_time
 import pandas as pd
 
@@ -58,6 +55,7 @@ class PocketOption:
         self.SESSION_COOKIE = {}
         self.api = PocketOptionAPI()
         self.loop = asyncio.get_event_loop()
+        self.logger = logging.getLogger("PocketOption")
 
         #
 
@@ -118,6 +116,7 @@ class PocketOption:
                 print("WebSocket thread joined successfully.")
 
         except Exception as e:
+            self.logger.warning(f"Error during disconnect: {e}")
             print(f"Error during disconnect: {e}")
 
     def connect(self):
@@ -131,6 +130,7 @@ class PocketOption:
             websocket_thread.start()
 
         except Exception as e:
+            self.logger.warning(f"Error to connect: {e}")
             print(f"Error al conectar: {e}")
             return False
         return True
@@ -148,7 +148,8 @@ class PocketOption:
             #print(f"Data2: {data2}")
             #print(f"Target: {pair}")
             return data2[5]
-        except:
+        except Exception as e:
+            self.logger.warning(f"Error getting payout {e}")
             return None
 
     @staticmethod
@@ -234,7 +235,8 @@ class PocketOption:
                 order_info = self.get_async_order(id_number)
                 if order_info and "id" in order_info and order_info["id"] is not None:
                     break
-            except:
+            except Exception as e:
+                self.logger.debug(f"CheckWin: error: {e}")
                 pass
             # except Exception as e:
             #    logging.error(f"Error retrieving order info: {e}")
@@ -343,7 +345,8 @@ class PocketOption:
             #print("FINISHED!!!")
 
             return df_resampled
-        except:
+        except Exception as e:
+            self.logger.warning(f"Error processing candles, {e}")
             #print("In except")
             return None
 
