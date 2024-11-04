@@ -1,24 +1,19 @@
 """Module for Pocket Option API."""
 import asyncio
-import datetime
-import time
 import json
 import logging
-import threading
 import requests
-import ssl
-import atexit
 from collections import deque
 from BinaryOptionsTools.platforms.pocketoption.ws.client import WebsocketClient
-from BinaryOptionsTools.platforms.pocketoption.ws.channels.get_balances import *
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.get_balances import Get_Balances
 
-from BinaryOptionsTools.platforms.pocketoption.ws.channels.ssid import Ssid
+# from BinaryOptionsTools.platforms.pocketoption.ws.channels.ssid import Ssid
 # from pocketoptionapi.ws.channels.subscribe import *
 # from pocketoptionapi.ws.channels.unsubscribe import *
 # from pocketoptionapi.ws.channels.setactives import SetActives
 from BinaryOptionsTools.platforms.pocketoption.ws.channels.candles import GetCandles
 # from pocketoptionapi.ws.channels.buyv2 import Buyv2
-from BinaryOptionsTools.platforms.pocketoption.ws.channels.buyv3 import *
+from BinaryOptionsTools.platforms.pocketoption.ws.channels.buyv3 import Buyv3
 # from pocketoptionapi.ws.channels.user import *
 # from pocketoptionapi.ws.channels.api_game_betinfo import Game_betinfo
 # from pocketoptionapi.ws.channels.instruments import Get_instruments
@@ -142,7 +137,7 @@ class PocketOptionAPI(object):  # pylint: disable=too-many-instance-attributes
 
     # ------------------
 
-    def __init__(self, proxies=None):
+    def __init__(self, proxies=None, logger: logging.Logger | None = None):
         """
         :param dict proxies: (optional) The http request proxies.
         """
@@ -160,7 +155,7 @@ class PocketOptionAPI(object):  # pylint: disable=too-many-instance-attributes
         self.buy_successful = None
         self.loop = asyncio.get_event_loop()
         self.websocket_client = WebsocketClient(self)
-
+        self.logger = logger or logging.getLogger("PocketOption")
     @property
     def websocket(self):
         """Property to get websocket.
@@ -221,7 +216,8 @@ class PocketOptionAPI(object):  # pylint: disable=too-many-instance-attributes
                 elif global_value.websocket_is_connected is True:
                     return True, None
 
-            except:
+            except Exception as e:
+                self.logger.warning(e)
                 pass
             pass
 
@@ -241,7 +237,8 @@ class PocketOptionAPI(object):  # pylint: disable=too-many-instance-attributes
             try:
                 if self.time_sync.server_timestamps is not None:
                     break
-            except:
+            except Exception as e:
+                self.logger.warning(e)
                 pass
         return True, None
 
