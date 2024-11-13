@@ -1,5 +1,2 @@
 numpy
 pandas
-tzlocal
-websockets
-tzdata

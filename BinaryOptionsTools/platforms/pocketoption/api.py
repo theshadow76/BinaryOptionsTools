@@ -181,8 +181,8 @@ class PocketOptionAPI(object):  # pylint: disable=too-many-instance-attributes
         # data = json.dumps(dict(name=name, msg=msg, request_id=request_id))
         data = f'42{json.dumps(msg)}'
 
-        while (global_value.ssl_Mutual_exclusion or global_value.ssl_Mutual_exclusion_write) and no_force_send:
-            pass
+        # while (global_value.ssl_Mutual_exclusion or global_value.ssl_Mutual_exclusion_write) and no_force_send:
+        #     pass
         global_value.ssl_Mutual_exclusion_write = True
 
         loop = asyncio.new_event_loop()

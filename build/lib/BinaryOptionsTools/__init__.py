@@ -21,7 +21,7 @@ class pocketoption:
             time.sleep(5)
         if self.api.check_connect():
             return True
-        elif self.api.check_connect() == False:
+        elif self.api.check_connect() is False:
             return False
         return None
     def Call(self, amount: int = 1, active: str = "EURUSD_otc", expiration: int = 60, add_check_win: bool = False):
@@ -30,7 +30,7 @@ class pocketoption:
             print(ido)
             data = self.api.check_win(ido)
             return data
-        elif add_check_win == False:
+        elif add_check_win is False:
             ido = self.api.buy(amount, active, "call", expiration)
             return ido
         return None
@@ -39,7 +39,7 @@ class pocketoption:
             ido = self.api.buy(amount, active, "put", expiration)
             data = self.api.check_win(ido)
             return data
-        elif add_check_win == False:
+        elif add_check_win is False:
             ido = self.api.buy(amount, active, "put", expiration)
             return ido
         return None
@@ -49,3 +49,6 @@ class pocketoption:
     def CheckWin(self, id):
         data = self.api.check_win(id)
         return data
+    
+    def GetPayout(self, pair):
+        return self.api.GetPayout(pair)
