@@ -35,7 +35,7 @@ source env/bin/activate # linux / mac
 
 3. Run the application:
     ```bash
-    python main.py
+    python examples/sma-crossoverbot.py
     ```
 
 ## Contributing
