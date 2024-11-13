@@ -139,6 +139,7 @@ class PocketOption:
         try:
             data = self.api.GetPayoutData()
             data = json.loads(data)
+            self.logger.debug(f"PayoutData: {data}")
             data2 = None
             for i in data:
                 #print(f"Checking for: {i[1]}")

@@ -97,18 +97,23 @@ class WebsocketClient(object):
         self.message = None
         self.url = None
         self.ssid: str = global_value.SSID
-        self.websocket = None
+        self.websocket: websockets.asyncio.client.ClientConnection = None
         self.region = REGION()
         self.loop = asyncio.get_event_loop()
         self.wait_second_message = False
         self._updateClosedDeals = False
+        try:
+            self.logger = self.api.logger
+        except Exception as e:
+            self.logger = logger
+            self.logger.debug(f"Logger not found in api, creating new one, {e}")
 
     async def websocket_listener(self, ws):
         try:
             async for message in ws:
                 await self.on_message(message)
         except Exception as e:
-            logging.warning(f"Error occurred: {e}")
+            self.logger.warning(f"Error occurred: {e}")
 
     async def connect(self):
         ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
@@ -117,11 +122,12 @@ class WebsocketClient(object):
 
         try:
             await self.api.close()
-        except:
+        except Exception as e:
+            self.logger.warning(f"Error connecting, {e}")  
             pass
 
         while not global_value.websocket_is_connected:
-            if global_value.IS_DEMO == False:
+            if global_value.IS_DEMO is False:
                 user_agent = get_user_agent(self.ssid)
                 if user_agent:
                     user_agent = user_agent["full"]
@@ -208,27 +214,27 @@ class WebsocketClient(object):
         elif message is not None:
             logger.warning("WebSocket not connected")
 
-    @staticmethod
-    def dict_queue_add(self, dict, maxdict, key1, key2, key3, value):
-        if key3 in dict[key1][key2]:
-            dict[key1][key2][key3] = value
-        else:
-            while True:
-                try:
-                    dic_size = len(dict[key1][key2])
-                except:
-                    dic_size = 0
-                if dic_size < maxdict:
-                    dict[key1][key2][key3] = value
-                    break
-                else:
-                    # del mini key
-                    del dict[key1][key2][sorted(dict[key1][key2].keys(), reverse=False)[0]]
+    # @staticmethod
+    # def dict_queue_add(self, dict, maxdict, key1, key2, key3, value):
+    #     if key3 in dict[key1][key2]:
+    #         dict[key1][key2][key3] = value
+    #     else:
+    #         while True:
+    #             try:
+    #                 dic_size = len(dict[key1][key2])
+    #             except:
+    #                 dic_size = 0
+    #             if dic_size < maxdict:
+    #                 dict[key1][key2][key3] = value
+    #                 break
+    #             else:
+    #                 # del mini key
+    #                 del dict[key1][key2][sorted(dict[key1][key2].keys(), reverse=False)[0]]
 
     async def on_message(self, message):  # pylint: disable=unused-argument
         """Method to process websocket messages."""
         # global_value.ssl_Mutual_exclusion = True
-        logger.debug(message)
+        self.logger.debug(message)
 
         if type(message) is bytes:
             message2 = message.decode('utf-8')
@@ -317,7 +323,7 @@ class WebsocketClient(object):
                 # self.api.historyNew = None
 
         elif message.startswith("42") and "NotAuthorized" in message:
-            logging.error("User not Authorized: Please Change SSID for one valid")
+            self.logger.error("User not Authorized: Please Change SSID for one valid")
             global_value.ssl_Mutual_exclusion = False
             await self.websocket.close()
 
