@@ -29,12 +29,13 @@ source env/bin/activate # linux / mac
 
 2. Install dependencies:
     ```bash
-    pip install -r requirements.txt
+    pip install . 
     ```
+    
 
 3. Run the application:
     ```bash
-    python main.py
+    python examples/sma-crossoverbot.py
     ```
 
 ## Contributing

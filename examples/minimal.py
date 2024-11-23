@@ -1,5 +1,6 @@
 import logging.config
 from BinaryOptionsTools import pocketoption
+
 import logging
 logging.basicConfig(level=logging.INFO)
 
