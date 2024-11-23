@@ -1,4 +1,5 @@
-# This is a sample Python script.
+# Made by © Vigo Walker and © Alenxendre Portner at Chipa
+
 import asyncio
 import threading
 import sys
