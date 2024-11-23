@@ -1,5 +1,4 @@
 import asyncio
-from datetime import datetime, timedelta, timezone
 
 import websockets
 import json
@@ -7,7 +6,6 @@ import logging
 import ssl
 
 # Suponiendo la existencia de estos módulos basados en tu código original
-import BinaryOptionsTools.platforms.pocketoption.constants as OP_code
 import BinaryOptionsTools.platforms.pocketoption.global_value as global_value
 from BinaryOptionsTools.platforms.pocketoption.constants import REGION
 from BinaryOptionsTools.platforms.pocketoption.ws.objects.timesync import TimeSync

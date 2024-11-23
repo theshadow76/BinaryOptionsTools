@@ -1,7 +1,7 @@
 """Module for Pocket option candles websocket chanel."""
 
 from BinaryOptionsTools.platforms.pocketoption.ws.channels.base import Base
-import time
+# import time
 import random
 
 

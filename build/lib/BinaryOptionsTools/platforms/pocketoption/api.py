@@ -6,8 +6,6 @@ import requests
 from collections import deque
 from BinaryOptionsTools.platforms.pocketoption.ws.client import WebsocketClient
 from BinaryOptionsTools.platforms.pocketoption.ws.channels.get_balances import Get_Balances
-
-# from BinaryOptionsTools.platforms.pocketoption.ws.channels.ssid import Ssid
 # from pocketoptionapi.ws.channels.subscribe import *
 # from pocketoptionapi.ws.channels.unsubscribe import *
 # from pocketoptionapi.ws.channels.setactives import SetActives
