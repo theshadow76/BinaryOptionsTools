@@ -5,11 +5,6 @@ from datetime import datetime, timedelta
 # converted to the platform's local date and time, and the returned datetime object is naive. time.mktime(
 # dt.timetuple())
 
-
-from datetime import datetime, timedelta
-import time
-
-
 def date_to_timestamp(date):
     """Convierte un objeto datetime a timestamp."""
     return int(date.timestamp())

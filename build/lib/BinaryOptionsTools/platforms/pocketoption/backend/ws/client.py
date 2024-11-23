@@ -31,7 +31,7 @@ class WebSocketClient:
 
     async def pro(self, message, websocket, url):
         # if byte data
-        if type(message) == type(b""):
+        if type(message) is type(b""):
             # cut 100 first symbols of byte date to prevent spam
             print(str(message)[:100])
             return

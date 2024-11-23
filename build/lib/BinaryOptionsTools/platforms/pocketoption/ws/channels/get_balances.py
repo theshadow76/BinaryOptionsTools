@@ -1,5 +1,5 @@
 from BinaryOptionsTools.platforms.pocketoption.ws.channels.base import Base
-import time
+# import time
 
 
 class Get_Balances(Base):

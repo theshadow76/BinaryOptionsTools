@@ -45,4 +45,5 @@ def GetSSID(email, password):
     print(session)
 
     driver.quit()
+    return session
 

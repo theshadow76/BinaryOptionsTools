@@ -23,7 +23,8 @@ class PocketOptionApi:
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 
         self.websocket_client = WebSocketClient(self.ws_url, pocket_api_instance=self)
-
+        self.logger.info("WebSocket client type: ", type(self.websocket_client))
+        print("WebSocket client type: ", type(self.websocket_client))
         # Create file handler and add it to the logger
         file_handler = logging.FileHandler('pocket.log')
         file_handler.setFormatter(formatter)
