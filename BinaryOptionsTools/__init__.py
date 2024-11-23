@@ -1,4 +1,4 @@
-# Made by © Vigo Walker
+# Made by © Vigo Walker and © Alenxendre Portner at Chipa
 
 # Pocket Option
 from BinaryOptionsTools.platforms.pocketoption.stable_api import PocketOption
