@@ -1,4 +1,4 @@
-# Made by © Vigo Walker and © Alenxendre Portner at Chipa
+# Made by © Vigo Walker and © Alexandre Portner at Chipa
 
 import asyncio
 import threading
