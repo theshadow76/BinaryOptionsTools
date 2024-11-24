@@ -1,3 +1,5 @@
+# Made by Vigo Walker
+
 from BinaryOptionsTools import pocketoption
 from ta.trend import MACD
 import time
