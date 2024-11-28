@@ -340,6 +340,7 @@ class PocketOption:
             return df_candles
         except Exception as e:
             print(f"Error: {e}")
+            return e
 
     @staticmethod
     def process_data_history(data, period):
