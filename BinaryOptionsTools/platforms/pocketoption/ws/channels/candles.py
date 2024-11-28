@@ -3,6 +3,7 @@
 from BinaryOptionsTools.platforms.pocketoption.ws.channels.base import Base
 # import time
 import random
+import time
 
 
 def index_num():
@@ -29,14 +30,17 @@ class GetCandles(Base):
         """
 
         #      {"asset": "AUDNZD_otc", "index": 171201484810, "time": 1712002800, "offset": 9000, "period": 60}]
+        rand = str(random.randint(10, 99))
+        cu = int(time.time())
+        t = str(cu + (2 * 60 * 60))
+        index = int(t + rand)
         data = {
             "asset": str(active_id),
-            "index": end_time,
+            "index": index,
             "offset": count,  # number of candles
             "period": interval,
             "time": end_time,  # time size sample:if interval set 1 mean get time 0~1 candle
         }
 
         data = ["loadHistoryPeriod", data]
-
         self.send_websocket_request(self.name, data)

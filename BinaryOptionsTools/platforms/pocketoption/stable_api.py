@@ -300,7 +300,7 @@ class PocketOption:
                     try:
                         # Enviar la petición de velas
                         #print("Before get candles")
-                        self.api.getcandles(active, 30, count, time_red)
+                        self.api.getcandles(active, period, count, time_red)
                         #print("AFter get candles")
 
                         # Esperar hasta que history_data no sea None
@@ -337,20 +337,9 @@ class PocketOption:
             df_candles['time'] = pd.to_datetime(df_candles['time'], unit='s')
             df_candles.set_index('time', inplace=True)
             df_candles.index = df_candles.index.floor('1s')
-
-            # Resamplear los datos en intervalos de 30 segundos y calcular open, high, low, close
-            df_resampled = df_candles['price'].resample(f'{period}s').ohlc()
-
-            # Resetear el índice para que 'time' vuelva a ser una columna
-            df_resampled.reset_index(inplace=True)
-
-            #print("FINISHED!!!")
-
-            return df_resampled
+            return df_candles
         except Exception as e:
-            self.logger.warning(f"Error processing candles, {e}")
-            #print("In except")
-            return None
+            print(f"Error: {e}")
 
     @staticmethod
     def process_data_history(data, period):
