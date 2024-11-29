@@ -282,7 +282,7 @@ class WebsocketClient(object):
         elif message == "2":
             await self.websocket.send("3")
 
-        elif "40" and "sid" in message:
+        elif "40" in message and "sid" in message:
             await self.websocket.send(self.ssid)
 
         elif message.startswith('451-['):
